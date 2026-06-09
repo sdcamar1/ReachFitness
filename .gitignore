@@ -5,6 +5,6 @@ __pycache__/
 *.pyc
 node_modules/
 dist/
+vite.log
 coverage/
 .DS_Store
-
