@@ -1,0 +1,82 @@
+from datetime import date, datetime
+from typing import Literal
+
+from pydantic import BaseModel, EmailStr, Field, field_validator
+
+
+AppointmentStatus = Literal["pending", "confirmed", "cancelled"]
+AppointmentFocus = Literal[
+    "Strength Training",
+    "Weight Loss",
+    "Athletic Performance",
+]
+
+
+class AboutContent(BaseModel):
+    name: str = Field(min_length=1, max_length=100)
+    title: str = Field(min_length=1, max_length=150)
+    bio: str = Field(min_length=1, max_length=8000)
+    quote: str = Field(min_length=1, max_length=500)
+    image_url: str = Field(max_length=1000)
+    credentials: list[str] = Field(default_factory=list, max_length=30)
+
+    @field_validator("credentials")
+    @classmethod
+    def clean_credentials(cls, value: list[str]) -> list[str]:
+        return [item.strip() for item in value if item.strip()]
+
+
+class AppointmentCreate(BaseModel):
+    date: date
+    time: str
+    name: str = Field(min_length=2, max_length=120)
+    email: EmailStr
+    phone: str = Field(min_length=7, max_length=30)
+    focus: AppointmentFocus
+    notes: str = Field(default="", max_length=2000)
+
+
+class AppointmentUpdate(BaseModel):
+    status: AppointmentStatus
+
+
+class AppointmentResponse(BaseModel):
+    id: str
+    date: str
+    time: str
+    name: str
+    email: EmailStr
+    phone: str
+    focus: AppointmentFocus
+    notes: str
+    status: AppointmentStatus
+    created_at: str
+
+
+class LoginRequest(BaseModel):
+    email: EmailStr
+    password: str = Field(min_length=1, max_length=500)
+
+
+class AuthResponse(BaseModel):
+    email: EmailStr
+
+
+def serialize_appointment(document: dict) -> AppointmentResponse:
+    return AppointmentResponse(
+        id=str(document["_id"]),
+        date=document["date"],
+        time=document["time"],
+        name=document["name"],
+        email=document["email"],
+        phone=document["phone"],
+        focus=document["focus"],
+        notes=document.get("notes", ""),
+        status=document["status"],
+        created_at=document["created_at"],
+    )
+
+
+def iso_now() -> str:
+    return datetime.now().astimezone().isoformat()
+
