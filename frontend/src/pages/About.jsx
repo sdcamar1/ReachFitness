@@ -8,7 +8,7 @@ export const fallbackAbout = {
   title: "Founder · REACH Fitness",
   bio: "Rose Copes brings the perspective of an NCAA Division I athlete at Grand Canyon University to every coaching relationship.\n\nNow a Doctor of Physical Therapy student at Rockhurst University, Rose connects performance with movement, recovery, and long-term health.",
   quote: "Your goals are within reach. Let's build the foundation to get you there.",
-  image_url: "/images/coach-portrait.png",
+  image_url: "/images/rose-profile.jpg",
   credentials: [
     "BS in Biology",
     "NSCA CSCS Certified",

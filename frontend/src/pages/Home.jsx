@@ -31,7 +31,7 @@ export function Home() {
         </div>
         <figure className="hero-image-wrap reveal reveal-delay">
           <img
-            src="/images/coach-portrait.png"
+            src="/images/rose-profile.jpg"
             alt="Strength and conditioning coach in a training studio"
           />
           <figcaption>

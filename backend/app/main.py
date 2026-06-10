@@ -49,7 +49,7 @@ DEFAULT_ABOUT = AboutContent(
         "they are and moves them toward where they want to go."
     ),
     quote="Your goals are within reach. Let's build the foundation to get you there.",
-    image_url="/images/coach-portrait.png",
+    image_url="/images/rose-profile.jpg",
     credentials=[
         "BS in Biology",
         "NSCA CSCS Certified",
@@ -71,6 +71,10 @@ async def lifespan(app: FastAPI):
         sparse=True,
     )
     await db.appointments.create_index([("date", ASCENDING), ("time", ASCENDING)])
+    await db.about.update_one(
+        {"_id": "about", "image_url": "/images/coach-portrait.png"},
+        {"$set": {"image_url": DEFAULT_ABOUT.image_url}},
+    )
     await db.about.update_one(
         {"_id": "about"},
         {"$setOnInsert": DEFAULT_ABOUT.model_dump()},
