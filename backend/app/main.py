@@ -102,6 +102,11 @@ def appointment_id(value: str) -> ObjectId:
         raise HTTPException(status_code=404, detail="Appointment not found.") from exc
 
 
+@app.get("/")
+async def root() -> dict[str, str]:
+    return {"name": "REACH Fitness API", "status": "ok"}
+
+
 @app.get("/api/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
