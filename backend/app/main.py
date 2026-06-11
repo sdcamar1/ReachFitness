@@ -1,4 +1,3 @@
-import asyncio
 from contextlib import asynccontextmanager
 from datetime import date
 
@@ -201,7 +200,7 @@ async def create_appointment(
     except DuplicateKeyError as exc:
         raise HTTPException(status_code=409, detail="That slot was just booked.") from exc
     document["_id"] = result.inserted_id
-    asyncio.create_task(notify_new_booking(settings, document))
+    await notify_new_booking(settings, document)
     return serialize_appointment(document)
 
 
@@ -266,7 +265,7 @@ async def update_appointment(
         ) from exc
 
     if current["status"] != "confirmed" and payload.status == "confirmed":
-        asyncio.create_task(notify_booking_confirmed(settings, document))
+        await notify_booking_confirmed(settings, document)
     return serialize_appointment(document)
 
 
