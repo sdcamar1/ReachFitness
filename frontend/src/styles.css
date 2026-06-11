@@ -263,9 +263,9 @@ em {
 }
 
 .hero-image-wrap {
-  grid-column: 8 / 13;
-  align-self: stretch;
-  max-height: calc(100vh - 155px);
+  grid-column: 9 / 13;
+  align-self: end;
+  max-height: calc(100vh - 210px);
   margin: 0;
   overflow: hidden;
 }
@@ -526,7 +526,7 @@ em {
 }
 
 .bio-copy p {
-  font-size: 17px;
+  font-size: 19px;
   font-weight: 300;
   line-height: 1.8;
 }
@@ -563,6 +563,7 @@ em {
 
 .credentials p {
   margin: 0;
+  font-size: 17px;
 }
 
 .about-cta {
@@ -1156,6 +1157,10 @@ select:focus {
 }
 
 .about-preview.compact .bio-copy p {
+  font-size: 13px;
+}
+
+.about-preview.compact .credentials p {
   font-size: 13px;
 }
 
