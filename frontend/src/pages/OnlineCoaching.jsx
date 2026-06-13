@@ -26,12 +26,6 @@ export function OnlineCoaching() {
               alt="Client following an online coaching workout from home"
             />
           </figure>
-          <p>
-            Online coaching sessions are collaborative. We look at your current
-            workout regimen, talk through what is working, identify potential
-            room for improvement, and create a plan that supports your goals
-            wherever you train.
-          </p>
         </div>
 
         <div className="service-points">
@@ -60,6 +54,15 @@ export function OnlineCoaching() {
               by peer-reviewed strength and conditioning research.
             </p>
           </article>
+        </div>
+
+        <div className="service-summary">
+          <p>
+            Online coaching sessions are collaborative. We look at your current
+            workout regimen, talk through what is working, identify potential
+            room for improvement, and create a plan that supports your goals
+            wherever you train.
+          </p>
         </div>
 
         <div className="service-cta">

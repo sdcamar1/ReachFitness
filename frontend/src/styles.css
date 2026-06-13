@@ -690,27 +690,36 @@ em {
 }
 
 .service-lede {
-  grid-column: 1 / 7;
+  grid-column: 1 / 6;
 }
 
 .service-image {
-  margin: 0 0 36px;
+  margin: 0;
   border-bottom: 1px solid var(--line);
 }
 
 .service-image img {
-  aspect-ratio: 1.18;
+  aspect-ratio: 1.35;
   filter: saturate(0.72);
 }
 
-.service-lede > p {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: clamp(25px, 2.7vw, 40px);
+.service-summary {
+  grid-column: 1 / 13;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  margin-top: 22px;
+  padding: 42px 0 16px;
+  border-top: 1px solid var(--ink);
+}
+
+.service-summary p {
+  grid-column: 3 / 12;
+  margin: 0;
+  text-align: left;
+  font-size: clamp(31px, 4vw, 58px);
   font-family: "Cormorant Garamond", serif;
   font-weight: 300;
-  line-height: 1.14;
+  line-height: 1.04;
 }
 
 .service-points {
@@ -751,7 +760,7 @@ em {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 55px;
+  margin-top: 26px;
   padding: 34px 0;
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--ink);
@@ -1668,8 +1677,13 @@ select:focus {
     padding-top: 48px;
   }
 
-  .service-lede > p {
-    margin-bottom: 0;
+  .service-summary {
+    display: block;
+    margin-top: 48px;
+    padding-top: 34px;
+  }
+
+  .service-summary p {
     font-size: 32px;
   }
 

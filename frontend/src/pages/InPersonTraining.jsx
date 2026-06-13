@@ -26,12 +26,6 @@ export function InPersonTraining() {
               alt="Coach guiding an in-person strength training session"
             />
           </figure>
-          <p>
-            In-person training starts with a personalized workout program based
-            on what you want to improve: strength training, weight loss, or
-            athletic performance. Each session gives you direct coaching,
-            movement feedback, and progression that fits your current ability.
-          </p>
         </div>
 
         <div className="service-points">
@@ -61,6 +55,15 @@ export function InPersonTraining() {
               of your health.
             </p>
           </article>
+        </div>
+
+        <div className="service-summary">
+          <p>
+            In-person training starts with a personalized workout program based
+            on what you want to improve: strength training, weight loss, or
+            athletic performance. Each session gives you direct coaching,
+            movement feedback, and progression that fits your current ability.
+          </p>
         </div>
 
         <div className="service-cta">
