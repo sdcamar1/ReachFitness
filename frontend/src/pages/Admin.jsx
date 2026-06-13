@@ -154,6 +154,8 @@ export function Admin() {
                   <p>{appointment.phone}</p>
                 </div>
                 <div>
+                  <p className="eyebrow">SESSION</p>
+                  <p>{appointment.service_type || "In-Person Training"}</p>
                   <p className="eyebrow">FOCUS</p>
                   <p>{appointment.focus}</p>
                   {appointment.notes && <p className="notes">{appointment.notes}</p>}
@@ -303,4 +305,3 @@ export function Admin() {
     </section>
   );
 }
-

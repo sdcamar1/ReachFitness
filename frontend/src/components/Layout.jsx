@@ -3,8 +3,18 @@ import { Menu, X } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const links = [
-  ["/", "Home"],
-  ["/about", "About"],
+  { to: "/", label: "Home", testId: "home" },
+  { to: "/about", label: "About", testId: "about" },
+  {
+    to: "/in-person-training",
+    label: "In-Person Training",
+    testId: "in-person-training",
+  },
+  {
+    to: "/online-coaching",
+    label: "Online Coaching",
+    testId: "online-coaching",
+  },
 ];
 
 export function Layout({ children }) {
@@ -24,11 +34,11 @@ export function Layout({ children }) {
           <small>Fitness</small>
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">
-          {links.map(([to, label]) => (
+          {links.map(({ to, label, testId }) => (
             <NavLink
               key={to}
               to={to}
-              data-testid={`nav-${label.toLowerCase()}`}
+              data-testid={`nav-${testId}`}
             >
               {label}
             </NavLink>
@@ -52,11 +62,11 @@ export function Layout({ children }) {
         </button>
         {open && (
           <nav className="mobile-nav" aria-label="Mobile navigation">
-            {links.map(([to, label]) => (
+            {links.map(({ to, label, testId }) => (
               <NavLink
                 key={to}
                 to={to}
-                data-testid={`mobile-nav-${label.toLowerCase()}`}
+                data-testid={`mobile-nav-${testId}`}
               >
                 {label}
               </NavLink>

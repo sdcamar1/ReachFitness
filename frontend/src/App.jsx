@@ -5,7 +5,9 @@ import { About } from "./pages/About";
 import { Admin } from "./pages/Admin";
 import { Book } from "./pages/Book";
 import { Home } from "./pages/Home";
+import { InPersonTraining } from "./pages/InPersonTraining";
 import { Login } from "./pages/Login";
+import { OnlineCoaching } from "./pages/OnlineCoaching";
 
 export default function App() {
   const location = useLocation();
@@ -15,6 +17,8 @@ export default function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/in-person-training" element={<InPersonTraining />} />
+      <Route path="/online-coaching" element={<OnlineCoaching />} />
       <Route path="/book" element={<Book />} />
       <Route path="/login" element={<Login />} />
       <Route path="/admin" element={<Admin />} />
@@ -24,4 +28,3 @@ export default function App() {
 
   return isAdmin ? routes : <Layout>{routes}</Layout>;
 }
-

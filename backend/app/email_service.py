@@ -50,6 +50,7 @@ async def notify_new_booking(settings: Settings, appointment: dict) -> None:
             ("Phone", "phone"),
             ("Date", "date"),
             ("Time", "time"),
+            ("Session Type", "service_type"),
             ("Focus", "focus"),
             ("Notes", "notes"),
         )
@@ -71,7 +72,7 @@ async def notify_booking_confirmed(settings: Settings, appointment: dict) -> Non
             f"<h1>You're confirmed.</h1>"
             f"<p>Hi {appointment['name']}, your REACH Fitness session is set for "
             f"<strong>{appointment['date']} at {appointment['time']}</strong>.</p>"
+            f"<p>Session type: {appointment.get('service_type', 'In-Person Training')}.</p>"
             "<p>Reply to this email if you need anything before your session.</p>"
         ),
     )
-

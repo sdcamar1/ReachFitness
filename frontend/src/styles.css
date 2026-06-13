@@ -95,12 +95,12 @@ img {
 }
 
 .desktop-nav {
-  grid-column: 7 / 13;
+  grid-column: 4 / 13;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 35px;
-  font-size: 13px;
+  gap: clamp(16px, 2.2vw, 35px);
+  font-size: 12px;
 }
 
 .desktop-nav > a:not(.nav-cta) {
@@ -583,6 +583,100 @@ em {
   font-family: "Cormorant Garamond", serif;
   font-size: 34px;
   font-style: italic;
+}
+
+.service-page {
+  padding-top: 155px;
+}
+
+.service-hero {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  padding-bottom: 95px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.service-hero .eyebrow {
+  grid-column: 1 / 4;
+}
+
+.service-hero h1 {
+  grid-column: 4 / 10;
+  margin: 0;
+  font-size: clamp(60px, 8vw, 120px);
+  line-height: 0.84;
+  letter-spacing: -0.05em;
+}
+
+.service-hero > p:last-child {
+  grid-column: 10 / 13;
+  align-self: end;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.service-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  padding-top: 70px;
+}
+
+.service-lede {
+  grid-column: 1 / 6;
+}
+
+.service-image {
+  margin: 0 0 48px;
+  border-bottom: 1px solid var(--line);
+}
+
+.service-image img {
+  aspect-ratio: 1.18;
+  filter: saturate(0.72);
+}
+
+.service-lede > p {
+  margin: 0 0 70px;
+  font-size: clamp(27px, 3vw, 45px);
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  line-height: 1.12;
+}
+
+.service-points {
+  grid-column: 7 / 13;
+  border-top: 1px solid var(--ink);
+}
+
+.service-points article {
+  display: grid;
+  grid-template-columns: 52px minmax(150px, 0.85fr) 1.3fr;
+  gap: 24px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.service-points span {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+}
+
+.service-points h2 {
+  margin: 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.service-points p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 .booking-page {
@@ -1466,9 +1560,41 @@ select:focus {
     font-size: 26px;
   }
 
+  .service-hero,
+  .service-layout,
   .booking-intro,
   .booking-step {
     display: block;
+  }
+
+  .service-hero {
+    padding-bottom: 60px;
+  }
+
+  .service-hero h1 {
+    margin: 35px 0;
+    font-size: 62px;
+  }
+
+  .service-layout {
+    padding-top: 48px;
+  }
+
+  .service-lede > p {
+    margin-bottom: 48px;
+    font-size: 32px;
+  }
+
+  .service-points {
+    margin-top: 65px;
+  }
+
+  .service-points article {
+    display: block;
+  }
+
+  .service-points h2 {
+    margin: 18px 0;
   }
 
   .booking-intro {
