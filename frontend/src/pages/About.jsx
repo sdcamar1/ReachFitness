@@ -16,6 +16,27 @@ export const fallbackAbout = {
   ],
 };
 
+const aboutCacheKey = "reach-about-content";
+
+function readCachedAbout() {
+  if (typeof window === "undefined") return fallbackAbout;
+  try {
+    const cached = window.localStorage.getItem(aboutCacheKey);
+    return cached ? JSON.parse(cached) : fallbackAbout;
+  } catch {
+    return fallbackAbout;
+  }
+}
+
+export function cacheAboutContent(content) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(aboutCacheKey, JSON.stringify(content));
+  } catch {
+    // Ignore storage failures so the public page can still render.
+  }
+}
+
 export function AboutPreview({ content, compact = false }) {
   const paragraphs = content.bio.split(/\n\s*\n/).filter(Boolean);
   return (
@@ -49,10 +70,15 @@ export function AboutPreview({ content, compact = false }) {
 }
 
 export function About() {
-  const [content, setContent] = useState(fallbackAbout);
+  const [content, setContent] = useState(readCachedAbout);
 
   useEffect(() => {
-    api("/about").then(setContent).catch(() => {});
+    api("/about")
+      .then((nextContent) => {
+        setContent(nextContent);
+        cacheAboutContent(nextContent);
+      })
+      .catch(() => {});
   }, []);
 
   return (
@@ -67,4 +93,3 @@ export function About() {
     </section>
   );
 }
-

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../components/ui/button";
 import { api } from "../lib/api";
-import { AboutPreview, fallbackAbout } from "./About";
+import { AboutPreview, cacheAboutContent, fallbackAbout } from "./About";
 
 const filters = ["all", "pending", "confirmed", "cancelled"];
 
@@ -82,6 +82,7 @@ export function Admin() {
         body: JSON.stringify(about),
       });
       setAbout(saved);
+      cacheAboutContent(saved);
       toast.success("About page saved.");
     } catch (error) {
       toast.error(error.message);
