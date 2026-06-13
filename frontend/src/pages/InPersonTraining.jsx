@@ -32,13 +32,6 @@ export function InPersonTraining() {
             athletic performance. Each session gives you direct coaching,
             movement feedback, and progression that fits your current ability.
           </p>
-          <Link
-            className="text-link"
-            to="/book"
-            data-testid="in-person-book"
-          >
-            Book in-person training <ArrowRight size={18} />
-          </Link>
         </div>
 
         <div className="service-points">
@@ -68,6 +61,17 @@ export function InPersonTraining() {
               of your health.
             </p>
           </article>
+        </div>
+
+        <div className="service-cta">
+          <p className="eyebrow">READY TO TRAIN?</p>
+          <Link
+            className="text-link"
+            to="/book"
+            data-testid="in-person-book"
+          >
+            Book in-person training <ArrowRight size={18} />
+          </Link>
         </div>
       </div>
     </section>

@@ -32,13 +32,6 @@ export function OnlineCoaching() {
             room for improvement, and create a plan that supports your goals
             wherever you train.
           </p>
-          <Link
-            className="text-link"
-            to="/book"
-            data-testid="online-coaching-book"
-          >
-            Book online coaching <ArrowRight size={18} />
-          </Link>
         </div>
 
         <div className="service-points">
@@ -67,6 +60,17 @@ export function OnlineCoaching() {
               by peer-reviewed strength and conditioning research.
             </p>
           </article>
+        </div>
+
+        <div className="service-cta">
+          <p className="eyebrow">READY TO START?</p>
+          <Link
+            className="text-link"
+            to="/book"
+            data-testid="online-coaching-book"
+          >
+            Book online coaching <ArrowRight size={18} />
+          </Link>
         </div>
       </div>
     </section>
