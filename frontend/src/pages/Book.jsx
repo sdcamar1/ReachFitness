@@ -20,6 +20,7 @@ const emptyForm = {
   email: "",
   phone: "",
   service_type: "In-Person Training",
+  duration: "60 Minutes",
   focus: "Strength Training",
   notes: "",
 };
@@ -98,6 +99,7 @@ export function Book() {
           <p>{displayDate}</p>
           <p>{labels[confirmation.time]}</p>
           <p>{confirmation.service_type}</p>
+          <p>{confirmation.duration}</p>
         </div>
         <p>
           Your session is pending confirmation. We’ll send an email once it’s
@@ -222,6 +224,18 @@ export function Book() {
               >
                 <option>In-Person Training</option>
                 <option>Online Coaching</option>
+              </select>
+            </label>
+            <label>
+              Session duration
+              <select
+                name="duration"
+                value={form.duration}
+                onChange={updateField}
+                data-testid="booking-duration"
+              >
+                <option>30 Minutes</option>
+                <option>60 Minutes</option>
               </select>
             </label>
             <label>

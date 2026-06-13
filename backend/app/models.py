@@ -11,6 +11,7 @@ AppointmentFocus = Literal[
     "Athletic Performance",
 ]
 AppointmentServiceType = Literal["In-Person Training", "Online Coaching"]
+AppointmentDuration = Literal["30 Minutes", "60 Minutes"]
 
 
 class AboutContent(BaseModel):
@@ -34,6 +35,7 @@ class AppointmentCreate(BaseModel):
     email: EmailStr
     phone: str = Field(min_length=7, max_length=30)
     service_type: AppointmentServiceType = "In-Person Training"
+    duration: AppointmentDuration = "60 Minutes"
     focus: AppointmentFocus
     notes: str = Field(default="", max_length=2000)
 
@@ -50,6 +52,7 @@ class AppointmentResponse(BaseModel):
     email: EmailStr
     phone: str
     service_type: AppointmentServiceType
+    duration: AppointmentDuration
     focus: AppointmentFocus
     notes: str
     status: AppointmentStatus
@@ -74,6 +77,7 @@ def serialize_appointment(document: dict) -> AppointmentResponse:
         email=document["email"],
         phone=document["phone"],
         service_type=document.get("service_type", "In-Person Training"),
+        duration=document.get("duration", "60 Minutes"),
         focus=document["focus"],
         notes=document.get("notes", ""),
         status=document["status"],

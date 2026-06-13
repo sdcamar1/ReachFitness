@@ -157,6 +157,7 @@ export function Admin() {
                 <div>
                   <p className="eyebrow">SESSION</p>
                   <p>{appointment.service_type || "In-Person Training"}</p>
+                  <p>{appointment.duration || "60 Minutes"}</p>
                   <p className="eyebrow">FOCUS</p>
                   <p>{appointment.focus}</p>
                   {appointment.notes && <p className="notes">{appointment.notes}</p>}
