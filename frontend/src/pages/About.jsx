@@ -64,6 +64,66 @@ export function AboutPreview({ content, compact = false }) {
             </div>
           ))}
         </div>
+        {!compact && (
+          <section className="certification-panel">
+            <p className="eyebrow">CSCS CERTIFICATION</p>
+            <h2>Why CSCS is a higher training standard</h2>
+            <p>
+              Certified Strength and Conditioning Specialist credentials are
+              built for advanced human performance, athletic development, and
+              injury-conscious programming. Compared with a standard CPT, the
+              CSCS requires a bachelor's degree or qualifying enrollment, a more
+              technical exam, and a narrower professional scope centered on
+              strength, conditioning, biomechanics, and periodized training.
+            </p>
+
+            <div className="certification-table">
+              <div className="certification-row header">
+                <span>Feature</span>
+                <span>Standard CPT</span>
+                <span>NSCA CSCS</span>
+              </div>
+              <div className="certification-row">
+                <span>Prerequisites</span>
+                <span>High school diploma or GED.</span>
+                <span>
+                  Bachelor's degree, often in a science or healthcare field, or
+                  qualifying enrollment as a chiropractic or medical student.
+                </span>
+              </div>
+              <div className="certification-row">
+                <span>Primary scope</span>
+                <span>
+                  General fitness, introductory weight loss, and exercise
+                  instruction for healthy populations.
+                </span>
+                <span>
+                  Advanced human performance, athletic development, complex
+                  biomechanics, and targeted injury prevention.
+                </span>
+              </div>
+              <div className="certification-row">
+                <span>Exam complexity</span>
+                <span>
+                  Foundational gym safety, basic programming, and client workout
+                  tracking.
+                </span>
+                <span>
+                  Two technical sections covering exercise science, nutrition,
+                  program design, testing, evaluation, and organization.
+                </span>
+              </div>
+              <div className="certification-row">
+                <span>Approx. pass rate</span>
+                <span>~77% pass rate for many standard CPT exams.</span>
+                <span>
+                  ~50% CSCS pass rate, with first-time pass rates historically
+                  reported around 38% to 50%.
+                </span>
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

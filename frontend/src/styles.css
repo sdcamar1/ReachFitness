@@ -471,7 +471,7 @@ em {
 }
 
 .about-portrait {
-  grid-column: 1 / 6;
+  grid-column: 1 / 5;
   margin: 0;
   position: sticky;
   top: 120px;
@@ -489,7 +489,7 @@ em {
 }
 
 .about-copy {
-  grid-column: 7 / 13;
+  grid-column: 6 / 13;
 }
 
 .about-copy h1 {
@@ -564,6 +564,70 @@ em {
 .credentials p {
   margin: 0;
   font-size: 17px;
+}
+
+.certification-panel {
+  margin-top: 85px;
+  padding-top: 34px;
+  border-top: 1px solid var(--ink);
+}
+
+.certification-panel h2 {
+  max-width: 660px;
+  margin: 26px 0 20px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(36px, 4.4vw, 62px);
+  font-weight: 300;
+  line-height: 0.95;
+}
+
+.certification-panel > p:not(.eyebrow) {
+  max-width: 760px;
+  margin: 0 0 46px;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.75;
+}
+
+.certification-table {
+  border-top: 1px solid var(--ink);
+}
+
+.certification-row {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 1.08fr;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.certification-row span {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.certification-row span:first-child {
+  color: var(--ink);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.certification-row.header span {
+  color: var(--ink);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.certification-row span:last-child {
+  border-left: 1px solid var(--line);
+  padding-left: 24px;
 }
 
 .about-cta {
@@ -1397,7 +1461,7 @@ select:focus {
   }
 
   .about-portrait {
-    grid-column: 1 / 6;
+    grid-column: 1 / 5;
   }
 
   .about-copy {
@@ -1549,6 +1613,16 @@ select:focus {
   .about-copy blockquote {
     padding-left: 18px;
     font-size: 35px;
+  }
+
+  .certification-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .certification-row span:last-child {
+    border-left: 0;
+    padding-left: 0;
   }
 
   .about-cta {

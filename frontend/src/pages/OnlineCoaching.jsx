@@ -22,8 +22,8 @@ export function OnlineCoaching() {
         <div className="service-lede">
           <figure className="service-image">
             <img
-              src="/images/training-detail.png"
-              alt="Training equipment and program details for remote coaching"
+              src="/images/online-coaching.jpeg"
+              alt="Client following an online coaching workout from home"
             />
           </figure>
           <p>
