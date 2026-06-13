@@ -242,6 +242,7 @@ export function Book() {
               <textarea
                 name="notes"
                 rows="4"
+                placeholder="Enter any promotional codes, prior injuries, or other information."
                 value={form.notes}
                 onChange={updateField}
                 data-testid="booking-notes"
