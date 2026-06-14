@@ -73,7 +73,7 @@ export function Home() {
           quality. It is a{" "}
           <span className="manifesto-accent">relationship</span> between{" "}
           <span className="manifesto-accent">multiple factors</span> that
-          underlie a person's physical condition.”
+          underlie a person's physical health.”
         </blockquote>
         <Link to="/about" data-testid="manifesto-about">
           Meet your coach <ArrowRight size={16} />
