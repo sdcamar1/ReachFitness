@@ -69,8 +69,11 @@ export function Home() {
       <section className="manifesto">
         <p className="eyebrow">THE REACH METHOD</p>
         <blockquote>
-          “Fitness is not one quality. It is the relationship between multiple
-          factors that underlie a person's physical condition.”
+          “<span className="manifesto-accent">Fitness</span> is not one
+          quality. It is a{" "}
+          <span className="manifesto-accent">relationship</span> between{" "}
+          <span className="manifesto-accent">multiple factors</span> that
+          underlie a person's physical condition.”
         </blockquote>
         <Link to="/about" data-testid="manifesto-about">
           Meet your coach <ArrowRight size={16} />

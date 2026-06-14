@@ -99,8 +99,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(12px, 1.55vw, 26px);
-  font-size: 15px;
+  gap: clamp(9px, 1.1vw, 20px);
+  font-size: 18px;
 }
 
 .desktop-nav > a:not(.nav-cta) {
@@ -124,12 +124,12 @@ img {
 }
 
 .nav-cta {
-  padding: 13px 18px;
+  padding: 13px 15px;
   border: 1px solid var(--ink);
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
+  font-size: 14px;
   transition: color 250ms ease, background 250ms ease;
 }
 
@@ -387,6 +387,10 @@ em {
   line-height: 1;
   letter-spacing: -0.035em;
   text-align: center;
+}
+
+.manifesto-accent {
+  color: var(--rust);
 }
 
 .manifesto a {
@@ -1445,7 +1449,7 @@ select:focus {
     padding: 18px 0;
     border-bottom: 1px solid var(--line);
     font-family: "Cormorant Garamond", serif;
-    font-size: 37px;
+    font-size: 42px;
   }
 
   .hero {
