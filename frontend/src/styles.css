@@ -278,6 +278,7 @@ em {
 .hero-image-wrap img {
   height: calc(100% - 48px);
   min-height: 520px;
+  object-position: 66% center;
   filter: saturate(0.72) contrast(1.03);
 }
 

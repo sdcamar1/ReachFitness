@@ -36,7 +36,7 @@ export function Home() {
         <figure className="hero-image-wrap reveal reveal-delay">
           <img
             src="/images/home-page.jpg"
-            alt="Strength and conditioning coach in a training studio"
+            alt="Athlete standing on a rocky overlook above the coast"
           />
           <figcaption>
             <span>01</span>
