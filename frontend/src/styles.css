@@ -415,20 +415,19 @@ em {
 }
 
 .image-feature-wide {
-  grid-column: 1 / 8;
+  grid-column: 1 / 7;
 }
 
 .image-feature-small {
-  grid-column: 9 / 13;
-  margin-bottom: 12vw;
+  grid-column: 8 / 13;
 }
 
 .image-feature-wide img {
-  aspect-ratio: 1.32;
+  aspect-ratio: 1.12;
 }
 
 .image-feature-small img {
-  aspect-ratio: 0.84;
+  aspect-ratio: 1.12;
 }
 
 .image-feature img {
@@ -1474,13 +1473,11 @@ select:focus {
   }
 
   .image-feature-wide {
-    grid-column: 1 / 10;
+    grid-column: 1 / 7;
   }
 
   .image-feature-small {
-    grid-column: 5 / 13;
-    margin-top: 80px;
-    margin-bottom: 0;
+    grid-column: 7 / 13;
   }
 
   .about-portrait {
