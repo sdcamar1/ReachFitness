@@ -37,6 +37,53 @@ export function cacheAboutContent(content) {
   }
 }
 
+function renderBioBlock(block, blockIndex) {
+  const lines = block.split("\n").filter((line) => line.trim());
+  const elements = [];
+  let paragraphLines = [];
+  let bulletItems = [];
+
+  function flushParagraph() {
+    if (!paragraphLines.length) return;
+    elements.push(
+      <p key={`bio-paragraph-${blockIndex}-${elements.length}`}>
+        {paragraphLines.join(" ")}
+      </p>,
+    );
+    paragraphLines = [];
+  }
+
+  function flushBullets() {
+    if (!bulletItems.length) return;
+    elements.push(
+      <ul key={`bio-list-${blockIndex}-${elements.length}`}>
+        {bulletItems.map((item, itemIndex) => (
+          <li key={`${item}-${itemIndex}`}>{item}</li>
+        ))}
+      </ul>,
+    );
+    bulletItems = [];
+  }
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith("-")) {
+      flushParagraph();
+      bulletItems.push(trimmed.replace(/^-\s*/, ""));
+      return;
+    }
+    flushBullets();
+    paragraphLines.push(trimmed);
+  });
+
+  flushParagraph();
+  flushBullets();
+
+  return (
+    <React.Fragment key={`bio-block-${blockIndex}`}>{elements}</React.Fragment>
+  );
+}
+
 export function AboutPreview({ content, compact = false }) {
   const paragraphs = content.bio.split(/\n\s*\n/).filter(Boolean);
   return (
@@ -51,9 +98,7 @@ export function AboutPreview({ content, compact = false }) {
         <p className="about-title">{content.title}</p>
         <blockquote>{content.quote}</blockquote>
         <div className="bio-copy">
-          {paragraphs.map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
+          {paragraphs.map(renderBioBlock)}
         </div>
         <div className="credentials">
           <p className="eyebrow">CREDENTIALS</p>

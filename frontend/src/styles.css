@@ -524,19 +524,26 @@ em {
   margin-left: 0;
 }
 
-.bio-copy p {
+.bio-copy p,
+.bio-copy li {
   font-size: 19px;
   font-weight: 300;
   line-height: 1.8;
 }
 
-.bio-copy p:first-child::first-letter {
-  float: left;
-  margin: -6px 8px -8px 0;
+.bio-copy p {
+  margin: 0 0 30px;
+}
+
+.bio-copy ul {
+  display: grid;
+  gap: 14px;
+  margin: 12px 0 34px;
+  padding-left: 24px;
+}
+
+.bio-copy li::marker {
   color: var(--rust);
-  font-family: "Cormorant Garamond", serif;
-  font-size: 74px;
-  line-height: 1;
 }
 
 .credentials {
@@ -1336,7 +1343,8 @@ select:focus {
   font-size: 27px;
 }
 
-.about-preview.compact .bio-copy p {
+.about-preview.compact .bio-copy p,
+.about-preview.compact .bio-copy li {
   font-size: 13px;
 }
 
