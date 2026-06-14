@@ -43,7 +43,7 @@ DEFAULT_ABOUT = AboutContent(
         "connects strength and conditioning with a deeper understanding of movement, "
         "recovery, and long-term health. Her work is especially focused on helping "
         "youth and collegiate athletes build durable foundations for sport and life.\n\n"
-        "REACH Fitness brings resistance, enhancement, athletics, conditioning, and "
+        "REACH Fitness brings resistance, endurance, aerobics, conditioning, and "
         "health into one deliberate practice. Each session meets the athlete where "
         "they are and moves them toward where they want to go."
     ),
@@ -280,4 +280,3 @@ async def delete_appointment(
     )
     if result.deleted_count == 0:
         raise HTTPException(status_code=404, detail="Appointment not found.")
-

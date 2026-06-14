@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 
 const disciplines = [
   ["R", "Resistance", "Build strength that transfers beyond the weight room."],
-  ["E", "Enhancement", "Refine movement, recovery, and performance habits."],
-  ["A", "Athletics", "Develop the complete competitor, at every level."],
+  ["E", "Endurance", "Build the stamina to sustain effort and recover well."],
+  [
+    "A",
+    "Aerobics",
+    "Train the cardiovascular base that supports daily life and performance.",
+  ],
   ["C", "Conditioning", "Create the capacity to perform, adapt, and endure."],
   ["H", "Health", "Train for a strong body and a sustainable life."],
 ];
@@ -22,7 +26,7 @@ export function Home() {
             whole <em>athlete.</em>
           </h1>
           <p className="hero-intro">
-            Resistance, enhancement, athletics, conditioning, and health.
+            Resistance, endurance, aerobics, conditioning, and health.
             Five disciplines, shaped into one personal practice.
           </p>
           <Link className="button link-button" to="/book" data-testid="hero-book">
@@ -65,8 +69,8 @@ export function Home() {
       <section className="manifesto">
         <p className="eyebrow">THE REACH METHOD</p>
         <blockquote>
-          “Performance is not one quality. It is the relationship between{" "}
-          <em>strength, skill, capacity,</em> and health.”
+          “Fitness is not one quality. It is the relationship between multiple
+          factors that underlie a person's physical condition.”
         </blockquote>
         <Link to="/about" data-testid="manifesto-about">
           Meet your coach <ArrowRight size={16} />
@@ -104,4 +108,3 @@ export function Home() {
     </>
   );
 }
-

@@ -77,7 +77,7 @@ export function Layout({ children }) {
       <main>{children}</main>
       <footer className="site-footer">
         <div>
-          <p className="eyebrow">Resistance · Enhancement · Athletics</p>
+          <p className="eyebrow">Resistance · Endurance · Aerobics</p>
           <p className="footer-name">REACH Fitness</p>
         </div>
         <div className="footer-meta">
