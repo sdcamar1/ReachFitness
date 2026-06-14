@@ -99,8 +99,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(14px, 1.85vw, 30px);
-  font-size: 14px;
+  gap: clamp(12px, 1.55vw, 26px);
+  font-size: 15px;
 }
 
 .desktop-nav > a:not(.nav-cta) {
@@ -129,7 +129,7 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
+  font-size: 12px;
   transition: color 250ms ease, background 250ms ease;
 }
 
@@ -1445,7 +1445,7 @@ select:focus {
     padding: 18px 0;
     border-bottom: 1px solid var(--line);
     font-family: "Cormorant Garamond", serif;
-    font-size: 34px;
+    font-size: 37px;
   }
 
   .hero {
