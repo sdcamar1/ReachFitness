@@ -1,5 +1,5 @@
-from contextlib import asynccontextmanager
 from datetime import date
+import os
 
 from bson import ObjectId
 from bson.errors import InvalidId
@@ -80,13 +80,28 @@ EXPANDED_ABOUT_BIOS = [
 ]
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
+def cors_origins() -> list[str]:
+    value = os.getenv("CORS_ORIGINS", "")
+    if value:
+        return [item.strip() for item in value.split(",") if item.strip()]
+    return ["http://localhost:5173", "https://reach-fitness-one.vercel.app"]
+
+
+async def ensure_database(request: Request):
+    if hasattr(request.app.state, "db"):
+        return request.app.state.db
+
     settings = get_settings()
+    if not settings.mongo_url:
+        raise HTTPException(
+            status_code=503,
+            detail="Database is not configured.",
+        )
+
     client = AsyncMongoClient(settings.mongo_url)
     db = client[settings.db_name]
-    app.state.mongo_client = client
-    app.state.db = db
+    request.app.state.mongo_client = client
+    request.app.state.db = db
     await db.appointments.create_index(
         [("active_slot", ASCENDING)],
         unique=True,
@@ -106,23 +121,21 @@ async def lifespan(app: FastAPI):
         {"$setOnInsert": DEFAULT_ABOUT.model_dump()},
         upsert=True,
     )
-    yield
-    await client.close()
+    return db
 
 
-app = FastAPI(title="REACH Fitness API", lifespan=lifespan)
-settings = get_settings()
+app = FastAPI(title="REACH Fitness API")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 
-def database(request: Request):
-    return request.app.state.db
+async def database(request: Request):
+    return await ensure_database(request)
 
 
 def appointment_id(value: str) -> ObjectId:

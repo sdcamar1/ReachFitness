@@ -9,14 +9,14 @@ BACKEND_DIR = Path(__file__).resolve().parent.parent
 
 
 class Settings(BaseSettings):
-    mongo_url: str
-    db_name: str
+    mongo_url: str = ""
+    db_name: str = "reach_fitness"
     jwt_secret: str
     admin_email: str
     admin_password: str
     resend_api_key: str = ""
-    sender_email: str
-    notify_email: str
+    sender_email: str = ""
+    notify_email: str = ""
     cors_origins: Annotated[list[str], NoDecode] = ["http://localhost:5173"]
     studio_timezone: str = "America/Chicago"
 
