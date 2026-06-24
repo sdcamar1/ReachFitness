@@ -15,6 +15,7 @@ const links = [
     label: "Online Coaching",
     testId: "online-coaching",
   },
+  { to: "/pricing", label: "Pricing", testId: "pricing" },
 ];
 
 export function Layout({ children }) {

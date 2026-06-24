@@ -8,6 +8,7 @@ import { Home } from "./pages/Home";
 import { InPersonTraining } from "./pages/InPersonTraining";
 import { Login } from "./pages/Login";
 import { OnlineCoaching } from "./pages/OnlineCoaching";
+import { Pricing } from "./pages/Pricing";
 
 export default function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ export default function App() {
       <Route path="/about" element={<About />} />
       <Route path="/in-person-training" element={<InPersonTraining />} />
       <Route path="/online-coaching" element={<OnlineCoaching />} />
+      <Route path="/pricing" element={<Pricing />} />
       <Route path="/book" element={<Book />} />
       <Route path="/login" element={<Login />} />
       <Route path="/admin" element={<Admin />} />

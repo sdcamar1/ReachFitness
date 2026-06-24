@@ -100,9 +100,9 @@ img {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(14px, 1.7vw, 28px);
+  gap: clamp(10px, 1.35vw, 24px);
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(19px, 1.55vw, 22px);
+  font-size: clamp(18px, 1.35vw, 22px);
   font-weight: 400;
   min-width: 0;
   white-space: nowrap;
@@ -129,11 +129,11 @@ img {
 }
 
 .nav-cta {
-  padding: 11px 17px;
+  padding: 10px 14px;
   border: 1px solid var(--ink);
   letter-spacing: 0.01em;
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(19px, 1.55vw, 22px);
+  font-size: clamp(18px, 1.35vw, 22px);
   transition: color 250ms ease, background 250ms ease;
   white-space: nowrap;
 }
@@ -780,6 +780,209 @@ em {
   padding: 34px 0;
   border-top: 1px solid var(--ink);
   border-bottom: 1px solid var(--ink);
+}
+
+.pricing-page {
+  padding-top: 155px;
+}
+
+.pricing-hero {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  padding-bottom: 70px;
+  border-bottom: 1px solid var(--ink);
+}
+
+.pricing-hero .eyebrow {
+  grid-column: 1 / 4;
+}
+
+.pricing-hero h1 {
+  grid-column: 4 / 10;
+  margin: 0;
+  font-size: clamp(62px, 8vw, 118px);
+  line-height: 0.84;
+  letter-spacing: -0.05em;
+}
+
+.pricing-hero > p:last-child {
+  grid-column: 10 / 13;
+  align-self: end;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.pricing-switch {
+  display: flex;
+  width: max-content;
+  margin: 42px auto 48px;
+  border: 1px solid var(--ink);
+}
+
+.pricing-switch button {
+  min-width: 170px;
+  padding: 14px 20px;
+  border: 0;
+  border-right: 1px solid var(--ink);
+  color: var(--ink);
+  background: transparent;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 200ms ease, background 200ms ease;
+}
+
+.pricing-switch button:last-child {
+  border-right: 0;
+}
+
+.pricing-switch button.active,
+.pricing-switch button:hover {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 24px;
+}
+
+.pricing-grid.single {
+  grid-template-columns: minmax(0, 0.55fr);
+  justify-content: center;
+}
+
+.pricing-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 620px;
+  padding: 32px 28px 28px;
+  border: 1px solid var(--line);
+  background: rgba(247, 247, 245, 0.74);
+}
+
+.pricing-card.featured {
+  border-color: var(--rust);
+  box-shadow: inset 0 5px 0 var(--rust);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 8px 12px;
+  color: var(--paper);
+  background: var(--rust);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pricing-card.featured > .eyebrow {
+  margin-top: 24px;
+}
+
+.pricing-card h2 {
+  margin: 20px 0 16px;
+  font-size: clamp(36px, 4vw, 54px);
+  line-height: 0.95;
+}
+
+.pricing-rate {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.pricing-rate span {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(44px, 5vw, 70px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.pricing-rate small {
+  color: var(--rust);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pricing-audience {
+  min-height: 112px;
+  margin: 0 0 28px;
+  color: #555;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
+.pricing-detail,
+.pricing-perks {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.pricing-detail strong,
+.pricing-detail span {
+  display: block;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.pricing-detail strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.pricing-perks ul {
+  display: grid;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pricing-perks li {
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 10px;
+  align-items: start;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+}
+
+.pricing-perks svg {
+  margin-top: 3px;
+  color: var(--rust);
+}
+
+.pricing-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--ink);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-style: italic;
 }
 
 .booking-page {
@@ -1674,18 +1877,45 @@ select:focus {
 
   .service-hero,
   .service-layout,
+  .pricing-hero,
   .booking-intro,
   .booking-step {
     display: block;
   }
 
+  .pricing-hero,
   .service-hero {
     padding-bottom: 60px;
   }
 
+  .pricing-hero h1,
   .service-hero h1 {
     margin: 35px 0;
     font-size: 62px;
+  }
+
+  .pricing-switch {
+    width: 100%;
+    margin: 38px 0 36px;
+  }
+
+  .pricing-switch button {
+    min-width: 0;
+    flex: 1;
+    padding: 13px 10px;
+  }
+
+  .pricing-grid,
+  .pricing-grid.single {
+    grid-template-columns: 1fr;
+  }
+
+  .pricing-card {
+    min-height: 0;
+  }
+
+  .pricing-audience {
+    min-height: 0;
   }
 
   .service-layout {
