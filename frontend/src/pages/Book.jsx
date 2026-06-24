@@ -57,9 +57,6 @@ export function Book() {
       .then((result) => setBooked(result.times))
       .catch(() => {
         setBooked([]);
-        toast.error(
-          "Could not check booked times. You can still choose a time and submit your consultation request.",
-        );
       });
   }, [selected]);
 
