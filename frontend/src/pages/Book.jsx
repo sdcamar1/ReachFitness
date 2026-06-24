@@ -55,7 +55,12 @@ export function Book() {
     if (!selected) return;
     api(`/appointments/booked?date=${format(selected, "yyyy-MM-dd")}`)
       .then((result) => setBooked(result.times))
-      .catch((error) => toast.error(error.message));
+      .catch(() => {
+        setBooked([]);
+        toast.error(
+          "Could not check booked times. You can still choose a time and submit your consultation request.",
+        );
+      });
   }, [selected]);
 
   function updateField(event) {
@@ -151,6 +156,46 @@ export function Book() {
         <section className="booking-step">
           <div className="step-label">
             <span>01</span>
+            <h2>Schedule</h2>
+          </div>
+          <div className="booking-scheduler">
+            <Calendar
+              mode="single"
+              selected={selected}
+              onSelect={setSelected}
+              disabled={{ before: new Date() }}
+              data-testid="booking-calendar"
+            />
+            <div className="scheduler-times">
+              <p className="scheduler-help">
+                Choose a date and available time for your free consultation.
+              </p>
+              {!selected ? (
+                <p className="muted">Select a date to see available times.</p>
+              ) : (
+                <div className="time-grid">
+                  {slots.map((slot) => (
+                    <button
+                      type="button"
+                      key={slot}
+                      disabled={booked.includes(slot)}
+                      className={time === slot ? "selected" : ""}
+                      onClick={() => setTime(slot)}
+                      data-testid={`time-${slot.replace(":", "")}`}
+                    >
+                      {labels[slot]}
+                      {booked.includes(slot) && <small>Booked</small>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="booking-step">
+          <div className="step-label">
+            <span>02</span>
             <h2>Format</h2>
           </div>
           <div className="form-grid">
@@ -174,7 +219,7 @@ export function Book() {
 
         <section className="booking-step">
           <div className="step-label">
-            <span>02</span>
+            <span>03</span>
             <h2>Goals</h2>
           </div>
           <div className="form-grid">
@@ -240,7 +285,7 @@ export function Book() {
 
         <section className="booking-step">
           <div className="step-label">
-            <span>03</span>
+            <span>04</span>
             <h2>Contact</h2>
           </div>
           <div className="form-grid">
@@ -289,46 +334,6 @@ export function Book() {
                 <option>Text</option>
               </select>
             </label>
-          </div>
-        </section>
-
-        <section className="booking-step">
-          <div className="step-label">
-            <span>04</span>
-            <h2>Schedule</h2>
-          </div>
-          <div className="booking-scheduler">
-            <Calendar
-              mode="single"
-              selected={selected}
-              onSelect={setSelected}
-              disabled={{ before: new Date() }}
-              data-testid="booking-calendar"
-            />
-            <div className="scheduler-times">
-              <p className="scheduler-help">
-                Choose a date and available time for your free consultation.
-              </p>
-              {!selected ? (
-                <p className="muted">Select a date to see available times.</p>
-              ) : (
-                <div className="time-grid">
-                  {slots.map((slot) => (
-                    <button
-                      type="button"
-                      key={slot}
-                      disabled={booked.includes(slot)}
-                      className={time === slot ? "selected" : ""}
-                      onClick={() => setTime(slot)}
-                      data-testid={`time-${slot.replace(":", "")}`}
-                    >
-                      {labels[slot]}
-                      {booked.includes(slot) && <small>Booked</small>}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
           </div>
           <Button
             type="submit"
