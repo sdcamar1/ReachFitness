@@ -11,7 +11,7 @@ const inPersonPlans = [
     audience:
       "Best for beginners building the habit or people with an active lifestyle who need structured strength work.",
     sessions: "1 private 1-on-1 session per week",
-    total: "8 total per month",
+    total: "4 total per month",
     perksTitle: "Perks",
     perks: [
       "Basic form analysis and movement screen during week one.",
@@ -27,7 +27,7 @@ const inPersonPlans = [
     audience:
       "Best for specific body composition or performance goals with steady momentum and higher accountability.",
     sessions: "2 private 1-on-1 sessions per week",
-    total: "12 total per month",
+    total: "8 total per month",
     perksTitle: "Added perks",
     perks: [
       "Everything in Tier 1.",
