@@ -29,14 +29,18 @@ class AboutContent(BaseModel):
 
 
 class AppointmentCreate(BaseModel):
-    date: date
-    time: str
+    date: date | None = None
+    time: str = ""
     name: str = Field(min_length=2, max_length=120)
     email: EmailStr
     phone: str = Field(min_length=7, max_length=30)
     service_type: AppointmentServiceType = "In-Person Training"
     duration: AppointmentDuration = "60 Minutes"
     focus: AppointmentFocus
+    commitment: str = Field(default="", max_length=50)
+    obstacle: str = Field(default="", max_length=2000)
+    promotion_code: str = Field(default="", max_length=200)
+    contact_preference: str = Field(default="Email", max_length=50)
     notes: str = Field(default="", max_length=2000)
 
 
@@ -54,6 +58,10 @@ class AppointmentResponse(BaseModel):
     service_type: AppointmentServiceType
     duration: AppointmentDuration
     focus: AppointmentFocus
+    commitment: str
+    obstacle: str
+    promotion_code: str
+    contact_preference: str
     notes: str
     status: AppointmentStatus
     created_at: str
@@ -79,6 +87,10 @@ def serialize_appointment(document: dict) -> AppointmentResponse:
         service_type=document.get("service_type", "In-Person Training"),
         duration=document.get("duration", "60 Minutes"),
         focus=document["focus"],
+        commitment=document.get("commitment", ""),
+        obstacle=document.get("obstacle", ""),
+        promotion_code=document.get("promotion_code", ""),
+        contact_preference=document.get("contact_preference", "Email"),
         notes=document.get("notes", ""),
         status=document["status"],
         created_at=document["created_at"],

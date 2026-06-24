@@ -157,9 +157,21 @@ export function Admin() {
                 <div>
                   <p className="eyebrow">SESSION</p>
                   <p>{appointment.service_type || "In-Person Training"}</p>
-                  <p>{appointment.duration || "60 Minutes"}</p>
+                  {appointment.time !== "Pending" && (
+                    <p>{appointment.duration || "60 Minutes"}</p>
+                  )}
                   <p className="eyebrow">FOCUS</p>
                   <p>{appointment.focus}</p>
+                  {appointment.commitment && <p>{appointment.commitment}</p>}
+                  {appointment.contact_preference && (
+                    <p>Prefers {appointment.contact_preference}</p>
+                  )}
+                  {appointment.obstacle && (
+                    <p className="notes">Obstacle: {appointment.obstacle}</p>
+                  )}
+                  {appointment.promotion_code && (
+                    <p className="notes">Promo: {appointment.promotion_code}</p>
+                  )}
                   {appointment.notes && <p className="notes">{appointment.notes}</p>}
                 </div>
                 <span className={`status-badge ${appointment.status}`}>

@@ -184,17 +184,20 @@ async def create_appointment(
     db=Depends(database),
     settings: Settings = Depends(get_settings),
 ) -> AppointmentResponse:
-    try:
-        validate_slot(payload.date, payload.time, settings.studio_timezone)
-    except ValueError as exc:
-        raise HTTPException(status_code=422, detail=str(exc)) from exc
-
     document = {
         **payload.model_dump(mode="json"),
         "status": "pending",
         "created_at": iso_now(),
-        "active_slot": f"{payload.date.isoformat()}|{payload.time}",
     }
+    if payload.date and payload.time:
+        try:
+            validate_slot(payload.date, payload.time, settings.studio_timezone)
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
+        document["active_slot"] = f"{payload.date.isoformat()}|{payload.time}"
+    else:
+        document["date"] = "Consultation request"
+        document["time"] = "Pending"
     try:
         result = await db.appointments.insert_one(document)
     except DuplicateKeyError as exc:
@@ -249,8 +252,10 @@ async def update_appointment(
     update: dict = {"$set": {"status": payload.status}}
     if payload.status == "cancelled":
         update["$unset"] = {"active_slot": ""}
-    else:
+    elif current.get("date") != "Consultation request" and current.get("time") != "Pending":
         update["$set"]["active_slot"] = f"{current['date']}|{current['time']}"
+    else:
+        update["$unset"] = {"active_slot": ""}
 
     try:
         document = await db.appointments.find_one_and_update(

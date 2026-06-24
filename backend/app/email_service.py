@@ -42,6 +42,7 @@ async def send_email_safe(
 
 
 async def notify_new_booking(settings: Settings, appointment: dict) -> None:
+    is_consultation = appointment.get("time") == "Pending"
     details = "".join(
         f"<p><strong>{label}:</strong> {appointment.get(key, '')}</p>"
         for label, key in (
@@ -51,30 +52,50 @@ async def notify_new_booking(settings: Settings, appointment: dict) -> None:
             ("Date", "date"),
             ("Time", "time"),
             ("Session Type", "service_type"),
-            ("Duration", "duration"),
             ("Focus", "focus"),
+            ("Commitment", "commitment"),
+            ("Obstacle", "obstacle"),
+            ("Preferred Contact", "contact_preference"),
+            ("Promotion Code", "promotion_code"),
             ("Notes", "notes"),
         )
     )
     await send_email_safe(
         settings,
         settings.notify_email,
-        f"New REACH booking: {appointment['date']} at {appointment['time']}",
+        (
+            "New REACH consultation request"
+            if is_consultation
+            else f"New REACH booking: {appointment['date']} at {appointment['time']}"
+        ),
         f"<h1>New session request</h1>{details}",
     )
 
 
 async def notify_booking_confirmed(settings: Settings, appointment: dict) -> None:
-    await send_email_safe(
-        settings,
-        appointment["email"],
-        "Your REACH Fitness session is confirmed",
-        (
+    if appointment.get("time") == "Pending":
+        html = (
+            f"<h1>You're confirmed.</h1>"
+            f"<p>Hi {appointment['name']}, your REACH Fitness consultation "
+            "request has been received.</p>"
+            "<p>We will contact you shortly to review your goals and schedule "
+            "the next step.</p>"
+        )
+    else:
+        html = (
             f"<h1>You're confirmed.</h1>"
             f"<p>Hi {appointment['name']}, your REACH Fitness session is set for "
             f"<strong>{appointment['date']} at {appointment['time']}</strong>.</p>"
             f"<p>Session type: {appointment.get('service_type', 'In-Person Training')}.</p>"
-            f"<p>Duration: {appointment.get('duration', '60 Minutes')}.</p>"
             "<p>Reply to this email if you need anything before your session.</p>"
+        )
+    await send_email_safe(
+        settings,
+        appointment["email"],
+        (
+            "Your REACH Fitness consultation request is confirmed"
+            if appointment.get("time") == "Pending"
+            else "Your REACH Fitness session is confirmed"
         ),
+        html,
     )

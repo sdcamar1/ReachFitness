@@ -1190,6 +1190,16 @@ em {
   margin-bottom: 40px;
 }
 
+.service-explainer {
+  margin: -14px 0 8px;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+  color: #555;
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.65;
+}
+
 label,
 fieldset legend {
   display: flex;
