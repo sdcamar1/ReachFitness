@@ -12,8 +12,6 @@ const inPersonPlans = [
       "Best for beginners building the habit or people with an active lifestyle who need structured strength work.",
     sessions: "1 private 1-on-1 session per week",
     total: "8 total per month",
-    scheduling:
-      "Fixed time slots, such as Tuesdays and Thursdays at 5:00 PM, to lock in your routine.",
     perksTitle: "Perks",
     perks: [
       "Basic form analysis and movement screen during week one.",
@@ -30,7 +28,6 @@ const inPersonPlans = [
       "Best for specific body composition or performance goals with steady momentum and higher accountability.",
     sessions: "2 private 1-on-1 sessions per week",
     total: "12 total per month",
-    scheduling: "Consistent recurring sessions built around your weekly routine.",
     perksTitle: "Added perks",
     perks: [
       "Everything in Tier 1.",
@@ -46,7 +43,6 @@ const inPersonPlans = [
       "Best for athletes, busy executives, or anyone looking for complete lifestyle optimization.",
     sessions: "3 private 1-on-1 sessions per week",
     total: "16 total per month",
-    scheduling: "Higher-touch weekly structure for training, recovery, and accountability.",
     perksTitle: "Premium perks",
     perks: [
       "Everything in Tiers 1 and 2.",
@@ -63,13 +59,10 @@ const onlinePlan = {
     "Remote coaching for athletes and active clients who want expert input on their current training and a clearer path forward.",
   sessions: "1 private, 30-minute live video session per week",
   total: "4 total per month",
-  scheduling:
-    "Permanent reservation of your preferred 30-minute blocks, such as Wednesday at 5:30 AM.",
   perksTitle: "Perks",
   perks: [
     "Initial online assessment.",
     "Personalized workout program.",
-    "Fixed time slots for consistent weekly coaching.",
   ],
 };
 
@@ -89,11 +82,6 @@ function PlanCard({ plan }) {
         <p className="eyebrow">Coaching</p>
         <strong>{plan.sessions}</strong>
         <span>{plan.total}</span>
-      </div>
-
-      <div className="pricing-detail">
-        <p className="eyebrow">Scheduling</p>
-        <span>{plan.scheduling}</span>
       </div>
 
       <div className="pricing-perks">
