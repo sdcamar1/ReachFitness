@@ -11,6 +11,7 @@ from pymongo.errors import DuplicateKeyError
 from .auth import (
     REFRESH_COOKIE,
     clear_auth_cookies,
+    create_token,
     credentials_match,
     decode_token,
     require_admin,
@@ -36,6 +37,35 @@ DEFAULT_ABOUT = AboutContent(
     title="Founder · REACH Fitness",
     bio=(
         "Rose Copes brings the perspective of an NCAA Division I athlete at Grand "
+        "Canyon University to every coaching relationship.\n\n"
+        "Now a Doctor of Physical Therapy student at Rockhurst University, Rose "
+        "connects performance with movement, recovery, and long-term health."
+    ),
+    quote="Your goals are within reach. Let's build the foundation to get you there.",
+    image_url="/images/rose-profile.jpg",
+    credentials=[
+        "BS in Biology",
+        "NSCA CSCS Certified",
+        "Division I NCAA Athlete",
+    ],
+)
+
+EXPANDED_ABOUT_BIOS = [
+    (
+        "Rose Copes brings the perspective of an NCAA Division I athlete at Grand "
+        "Canyon University to every coaching relationship. Her own experience in "
+        "high-performance environments shaped a practical belief: lasting progress "
+        "comes from training the whole athlete, not chasing isolated outcomes.\n\n"
+        "Now a Doctor of Physical Therapy student at Rockhurst University, Rose "
+        "connects strength and conditioning with a deeper understanding of movement, "
+        "recovery, and long-term health. Her work is especially focused on helping "
+        "youth and collegiate athletes build durable foundations for sport and life.\n\n"
+        "REACH Fitness brings resistance, enhancement, athletics, conditioning, and "
+        "health into one deliberate practice. Each session meets the athlete where "
+        "they are and moves them toward where they want to go."
+    ),
+    (
+        "Rose Copes brings the perspective of an NCAA Division I athlete at Grand "
         "Canyon University to every coaching relationship. Her own experience in "
         "high-performance environments shaped a practical belief: lasting progress "
         "comes from training the whole athlete, not chasing isolated outcomes.\n\n"
@@ -47,14 +77,7 @@ DEFAULT_ABOUT = AboutContent(
         "health into one deliberate practice. Each session meets the athlete where "
         "they are and moves them toward where they want to go."
     ),
-    quote="Your goals are within reach. Let's build the foundation to get you there.",
-    image_url="/images/rose-profile.jpg",
-    credentials=[
-        "BS in Biology",
-        "NSCA CSCS Certified",
-        "Division I NCAA Athlete",
-    ],
-)
+]
 
 
 @asynccontextmanager
@@ -73,6 +96,10 @@ async def lifespan(app: FastAPI):
     await db.about.update_one(
         {"_id": "about", "image_url": "/images/coach-portrait.png"},
         {"$set": {"image_url": DEFAULT_ABOUT.image_url}},
+    )
+    await db.about.update_one(
+        {"_id": "about", "bio": {"$in": EXPANDED_ABOUT_BIOS}},
+        {"$set": {"bio": DEFAULT_ABOUT.bio}},
     )
     await db.about.update_one(
         {"_id": "about"},
@@ -124,7 +151,10 @@ async def login(
     if not credentials_match(payload.email, payload.password, settings):
         raise HTTPException(status_code=401, detail="Incorrect email or password.")
     set_auth_cookies(response, settings.admin_email, settings.jwt_secret)
-    return AuthResponse(email=settings.admin_email)
+    return AuthResponse(
+        email=settings.admin_email,
+        access_token=create_token(settings.admin_email, settings.jwt_secret, "access"),
+    )
 
 
 @app.get("/api/auth/me", response_model=AuthResponse)

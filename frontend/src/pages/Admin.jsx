@@ -3,7 +3,7 @@ import { Check, LogOut, Plus, Trash2, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../components/ui/button";
-import { api } from "../lib/api";
+import { api, clearAuthToken } from "../lib/api";
 import { AboutPreview, cacheAboutContent, fallbackAbout } from "./About";
 
 const filters = ["all", "pending", "confirmed", "cancelled"];
@@ -91,6 +91,7 @@ export function Admin() {
 
   async function logout() {
     await api("/auth/logout", { method: "POST" }).catch(() => {});
+    clearAuthToken();
     navigate("/");
   }
 

@@ -74,6 +74,7 @@ class LoginRequest(BaseModel):
 
 class AuthResponse(BaseModel):
     email: EmailStr
+    access_token: str | None = None
 
 
 def serialize_appointment(document: dict) -> AppointmentResponse:

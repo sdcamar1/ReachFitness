@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../components/ui/button";
-import { api } from "../lib/api";
+import { api, setAuthToken } from "../lib/api";
 
 export function Login() {
   const navigate = useNavigate();
@@ -19,10 +19,11 @@ export function Login() {
     event.preventDefault();
     setLoading(true);
     try {
-      await api("/auth/login", {
+      const result = await api("/auth/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
+      setAuthToken(result.access_token);
       navigate("/admin");
     } catch (error) {
       toast.error(error.message);
@@ -69,4 +70,3 @@ export function Login() {
     </section>
   );
 }
-
