@@ -42,7 +42,7 @@ async def send_email_safe(
 
 
 async def notify_new_booking(settings: Settings, appointment: dict) -> None:
-    is_consultation = appointment.get("time") == "Pending"
+    is_consultation = bool(appointment.get("commitment"))
     details = "".join(
         f"<p><strong>{label}:</strong> {appointment.get(key, '')}</p>"
         for label, key in (
@@ -73,13 +73,13 @@ async def notify_new_booking(settings: Settings, appointment: dict) -> None:
 
 
 async def notify_booking_confirmed(settings: Settings, appointment: dict) -> None:
-    if appointment.get("time") == "Pending":
+    if appointment.get("commitment"):
         html = (
             f"<h1>You're confirmed.</h1>"
-            f"<p>Hi {appointment['name']}, your REACH Fitness consultation "
-            "request has been received.</p>"
-            "<p>We will contact you shortly to review your goals and schedule "
-            "the next step.</p>"
+            f"<p>Hi {appointment['name']}, your REACH Fitness consultation is "
+            f"set for <strong>{appointment['date']} at {appointment['time']}</strong>.</p>"
+            "<p>We will contact you shortly to review your goals and prepare "
+            "for the next step.</p>"
         )
     else:
         html = (
@@ -94,7 +94,7 @@ async def notify_booking_confirmed(settings: Settings, appointment: dict) -> Non
         appointment["email"],
         (
             "Your REACH Fitness consultation request is confirmed"
-            if appointment.get("time") == "Pending"
+            if appointment.get("commitment")
             else "Your REACH Fitness session is confirmed"
         ),
         html,

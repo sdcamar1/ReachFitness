@@ -49,7 +49,7 @@ export function Layout({ children }) {
             to="/book"
             data-testid="nav-book-session"
           >
-            Book a session
+            Book a Consultation
           </Link>
         </nav>
         <button

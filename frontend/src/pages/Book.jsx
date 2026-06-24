@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { format } from "date-fns";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { toast } from "sonner";
+import { Calendar } from "../components/ui/calendar";
 import { Button } from "../components/ui/button";
 import { api } from "../lib/api";
+
+const weekendSlots = ["09:00", "12:00", "15:00", "18:00"];
+const weekdaySlots = ["18:00"];
+const labels = {
+  "09:00": "9:00 AM",
+  "12:00": "12:00 PM",
+  "15:00": "3:00 PM",
+  "18:00": "6:00 PM",
+};
 
 const emptyForm = {
   service_type: "In-Person Training",
@@ -25,9 +36,27 @@ const consultationDetails = {
 };
 
 export function Book() {
+  const [selected, setSelected] = useState();
+  const [time, setTime] = useState("");
+  const [booked, setBooked] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [submitting, setSubmitting] = useState(false);
   const [confirmation, setConfirmation] = useState(null);
+
+  const slots = useMemo(() => {
+    if (!selected) return [];
+    return selected.getDay() === 0 || selected.getDay() === 6
+      ? weekendSlots
+      : weekdaySlots;
+  }, [selected]);
+
+  useEffect(() => {
+    setTime("");
+    if (!selected) return;
+    api(`/appointments/booked?date=${format(selected, "yyyy-MM-dd")}`)
+      .then((result) => setBooked(result.times))
+      .catch((error) => toast.error(error.message));
+  }, [selected]);
 
   function updateField(event) {
     setForm((current) => ({
@@ -38,11 +67,19 @@ export function Book() {
 
   async function submit(event) {
     event.preventDefault();
+    if (!selected || !time) {
+      toast.error("Choose a consultation date and time first.");
+      return;
+    }
     setSubmitting(true);
     try {
       const result = await api("/appointments", {
         method: "POST",
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          ...form,
+          date: format(selected, "yyyy-MM-dd"),
+          time,
+        }),
       });
       setConfirmation(result);
     } catch (error) {
@@ -53,6 +90,10 @@ export function Book() {
   }
 
   if (confirmation) {
+    const displayDate = format(
+      new Date(`${confirmation.date}T12:00:00`),
+      "EEEE, MMMM d, yyyy",
+    );
     return (
       <section className="confirmation page-section">
         <div className="confirmation-mark">
@@ -65,18 +106,22 @@ export function Book() {
           <em>confirmed.</em>
         </h1>
         <div className="confirmation-details">
+          <p>{displayDate}</p>
+          <p>{labels[confirmation.time]}</p>
           <p>{confirmation.service_type}</p>
           <p>{confirmation.focus}</p>
           <p>{confirmation.commitment}</p>
         </div>
         <p>
-          Your consultation request is confirmed. We will contact you shortly to
-          review your goals and schedule the next step.
+          Your consultation is confirmed. We will contact you shortly to review
+          your goals and prepare for the next step.
         </p>
         <Button
           variant="outline"
           onClick={() => {
             setConfirmation(null);
+            setSelected(undefined);
+            setTime("");
             setForm(emptyForm);
           }}
           data-testid="book-another"
@@ -175,7 +220,7 @@ export function Book() {
               <textarea
                 name="notes"
                 rows="4"
-                placeholder="Enter any promotional codes, prior injuries, or other information."
+                placeholder="Enter any prior injuries or other information."
                 value={form.notes}
                 onChange={updateField}
                 data-testid="booking-notes"
@@ -244,6 +289,46 @@ export function Book() {
                 <option>Text</option>
               </select>
             </label>
+          </div>
+        </section>
+
+        <section className="booking-step">
+          <div className="step-label">
+            <span>04</span>
+            <h2>Schedule</h2>
+          </div>
+          <div className="booking-scheduler">
+            <Calendar
+              mode="single"
+              selected={selected}
+              onSelect={setSelected}
+              disabled={{ before: new Date() }}
+              data-testid="booking-calendar"
+            />
+            <div className="scheduler-times">
+              <p className="scheduler-help">
+                Choose a date and available time for your free consultation.
+              </p>
+              {!selected ? (
+                <p className="muted">Select a date to see available times.</p>
+              ) : (
+                <div className="time-grid">
+                  {slots.map((slot) => (
+                    <button
+                      type="button"
+                      key={slot}
+                      disabled={booked.includes(slot)}
+                      className={time === slot ? "selected" : ""}
+                      onClick={() => setTime(slot)}
+                      data-testid={`time-${slot.replace(":", "")}`}
+                    >
+                      {labels[slot]}
+                      {booked.includes(slot) && <small>Booked</small>}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
           <Button
             type="submit"

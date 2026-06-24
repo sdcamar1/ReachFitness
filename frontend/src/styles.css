@@ -1020,14 +1020,17 @@ em {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 24px;
-  padding: 70px 0;
+  margin-bottom: 24px;
+  padding: 48px 36px;
   border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 253, 0.42);
 }
 
 .step-label {
   grid-column: 1 / 4;
   display: flex;
-  gap: 35px;
+  gap: 24px;
 }
 
 .step-label span {
@@ -1036,8 +1039,8 @@ em {
 }
 
 .step-label h2 {
-  margin: -10px 0 0;
-  font-size: 50px;
+  margin: -7px 0 0;
+  font-size: 42px;
 }
 
 .reach-calendar {
@@ -1184,6 +1187,7 @@ em {
 }
 
 .form-grid {
+  grid-column: 5 / 13;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px 24px;
@@ -1213,6 +1217,16 @@ fieldset legend {
 
 label span {
   color: #999;
+}
+
+.booking-form label {
+  gap: 12px;
+  font-family: "Outfit", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.35;
+  text-transform: none;
 }
 
 input,
@@ -1248,6 +1262,32 @@ select:focus {
 
 .booking-step > .button {
   width: max-content;
+  grid-column: 5 / 13;
+}
+
+.booking-scheduler {
+  grid-column: 5 / 13;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(220px, 1fr);
+  gap: 32px;
+  align-items: start;
+  margin-bottom: 34px;
+}
+
+.booking-scheduler .reach-calendar {
+  grid-column: auto;
+}
+
+.booking-scheduler .time-grid {
+  grid-template-columns: 1fr 1fr;
+}
+
+.scheduler-help {
+  margin: 0 0 24px;
+  color: #555;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.65;
 }
 
 .back-to-top {
@@ -1979,6 +2019,14 @@ select:focus {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .booking-scheduler {
+    display: block;
+  }
+
+  .scheduler-times {
+    margin-top: 34px;
   }
 
   .full-field {
