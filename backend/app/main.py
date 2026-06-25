@@ -1,5 +1,6 @@
 from datetime import date
 import os
+from typing import Optional
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -268,7 +269,7 @@ async def booked_appointments(
 
 @app.get("/api/appointments", response_model=list[AppointmentResponse])
 async def list_appointments(
-    appointment_status: AppointmentStatus | None = Query(default=None, alias="status"),
+    appointment_status: Optional[AppointmentStatus] = Query(default=None, alias="status"),
     _admin: str = Depends(require_admin),
     db=Depends(database),
 ) -> list[AppointmentResponse]:

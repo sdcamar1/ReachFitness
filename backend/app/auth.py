@@ -1,6 +1,6 @@
 import hmac
 from datetime import datetime, timedelta, timezone
-from typing import Literal
+from typing import Literal, Optional
 
 import jwt
 from fastapi import Depends, HTTPException, Request, Response, status
@@ -79,7 +79,7 @@ def decode_token(token: str, settings: Settings, expected_type: str) -> str:
     return payload["sub"]
 
 
-def bearer_token(request: Request) -> str | None:
+def bearer_token(request: Request) -> Optional[str]:
     authorization = request.headers.get("authorization", "")
     if authorization.lower().startswith("bearer "):
         return authorization[7:].strip()

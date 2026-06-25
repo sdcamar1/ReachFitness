@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Literal
+from typing import Literal, Optional
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
 
@@ -29,7 +29,7 @@ class AboutContent(BaseModel):
 
 
 class AppointmentCreate(BaseModel):
-    date: date | None = None
+    date: Optional[date] = None
     time: str = ""
     name: str = Field(min_length=2, max_length=120)
     email: EmailStr
@@ -74,7 +74,7 @@ class LoginRequest(BaseModel):
 
 class AuthResponse(BaseModel):
     email: EmailStr
-    access_token: str | None = None
+    access_token: Optional[str] = None
 
 
 def serialize_appointment(document: dict) -> AppointmentResponse:
