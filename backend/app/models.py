@@ -1,4 +1,4 @@
-from datetime import date, datetime
+from datetime import date as Date, datetime
 from typing import Literal, Optional
 
 from pydantic import BaseModel, EmailStr, Field, field_validator
@@ -29,7 +29,7 @@ class AboutContent(BaseModel):
 
 
 class AppointmentCreate(BaseModel):
-    date: Optional[date] = None
+    date: Optional[Date] = None
     time: str = ""
     name: str = Field(min_length=2, max_length=120)
     email: EmailStr
