@@ -1,12 +1,8 @@
 from datetime import date
 import os
 
-from bson import ObjectId
-from bson.errors import InvalidId
 from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
-from pymongo import ASCENDING, AsyncMongoClient, ReturnDocument
-from pymongo.errors import DuplicateKeyError
 
 from .auth import (
     REFRESH_COOKIE,
@@ -88,6 +84,8 @@ def cors_origins() -> list[str]:
 
 
 async def ensure_database(request: Request):
+    from pymongo import ASCENDING, AsyncMongoClient
+
     if hasattr(request.app.state, "db"):
         return request.app.state.db
 
@@ -138,7 +136,10 @@ async def database(request: Request):
     return await ensure_database(request)
 
 
-def appointment_id(value: str) -> ObjectId:
+def appointment_id(value: str):
+    from bson import ObjectId
+    from bson.errors import InvalidId
+
     try:
         return ObjectId(value)
     except InvalidId as exc:
@@ -227,6 +228,8 @@ async def create_appointment(
     db=Depends(database),
     settings: Settings = Depends(get_settings),
 ) -> AppointmentResponse:
+    from pymongo.errors import DuplicateKeyError
+
     document = {
         **payload.model_dump(mode="json"),
         "status": "pending",
@@ -287,6 +290,9 @@ async def update_appointment(
     db=Depends(database),
     settings: Settings = Depends(get_settings),
 ) -> AppointmentResponse:
+    from pymongo import ReturnDocument
+    from pymongo.errors import DuplicateKeyError
+
     object_id = appointment_id(appointment_id_value)
     current = await db.appointments.find_one({"_id": object_id})
     if not current:
