@@ -273,6 +273,8 @@ async def list_appointments(
     _admin: str = Depends(require_admin),
     db=Depends(database),
 ) -> list[AppointmentResponse]:
+    from pymongo import ASCENDING
+
     query = {"status": appointment_status} if appointment_status else {}
     cursor = db.appointments.find(query).sort(
         [("date", ASCENDING), ("time", ASCENDING)]

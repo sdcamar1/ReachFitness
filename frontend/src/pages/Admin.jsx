@@ -15,6 +15,7 @@ export function Admin() {
   const [appointments, setAppointments] = useState([]);
   const [about, setAbout] = useState(fallbackAbout);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
 
   async function loadAppointments(nextFilter = filter) {
     const query = nextFilter === "all" ? "" : `?status=${nextFilter}`;
@@ -26,14 +27,30 @@ export function Admin() {
     async function load() {
       try {
         await api("/auth/me");
-        const [appointmentData, aboutData] = await Promise.all([
-          api("/appointments"),
-          api("/about"),
-        ]);
+      } catch (error) {
+        if (error.status === 401) {
+          navigate("/login");
+          return;
+        }
+        setLoadError(error.message);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        const appointmentData = await api("/appointments");
         setAppointments(appointmentData);
+      } catch (error) {
+        setLoadError(error.message);
+        toast.error(`Appointments could not load: ${error.message}`);
+      }
+
+      try {
+        const aboutData = await api("/about");
         setAbout(aboutData);
-      } catch {
-        navigate("/login");
+      } catch (error) {
+        setLoadError(error.message);
+        toast.error(`About content could not load: ${error.message}`);
       } finally {
         setLoading(false);
       }
@@ -125,6 +142,12 @@ export function Admin() {
           About
         </button>
       </div>
+
+      {loadError && (
+        <p className="empty-state" role="alert">
+          Dashboard data could not fully load: {loadError}
+        </p>
+      )}
 
       {tab === "appointments" ? (
         <div className="appointments-panel">
