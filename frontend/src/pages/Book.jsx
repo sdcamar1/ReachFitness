@@ -233,6 +233,37 @@ export function Book() {
                 data-testid="booking-success-vision"
               />
             </label>
+            <label className="full-field">
+              What is your biggest obstacle to staying consistent?
+              <textarea
+                required
+                name="obstacle"
+                rows="3"
+                value={form.obstacle}
+                onChange={updateField}
+                data-testid="booking-obstacle"
+              />
+            </label>
+            <label className="full-field">
+              Other information I should know <span>(optional)</span>
+              <textarea
+                name="notes"
+                rows="4"
+                placeholder="Enter any prior injuries or other information."
+                value={form.notes}
+                onChange={updateField}
+                data-testid="booking-notes"
+              />
+            </label>
+            <label>
+              Promotion code <span>(optional)</span>
+              <input
+                name="promotion_code"
+                value={form.promotion_code}
+                onChange={updateField}
+                data-testid="booking-promotion-code"
+              />
+            </label>
             <label>
               Have you previously tried personal training?
               <select
@@ -270,37 +301,6 @@ export function Book() {
                 <option>2x/week</option>
                 <option>3+/week</option>
               </select>
-            </label>
-            <label className="full-field">
-              What is your biggest obstacle to staying consistent?
-              <textarea
-                required
-                name="obstacle"
-                rows="3"
-                value={form.obstacle}
-                onChange={updateField}
-                data-testid="booking-obstacle"
-              />
-            </label>
-            <label className="full-field">
-              Other information I should know <span>(optional)</span>
-              <textarea
-                name="notes"
-                rows="4"
-                placeholder="Enter any prior injuries or other information."
-                value={form.notes}
-                onChange={updateField}
-                data-testid="booking-notes"
-              />
-            </label>
-            <label>
-              Promotion code <span>(optional)</span>
-              <input
-                name="promotion_code"
-                value={form.promotion_code}
-                onChange={updateField}
-                data-testid="booking-promotion-code"
-              />
             </label>
           </div>
         </section>
