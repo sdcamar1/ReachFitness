@@ -222,6 +222,44 @@ export function Book() {
             <h2>Goals</h2>
           </div>
           <div className="form-grid">
+            <label>
+              Have you previously tried personal training?
+              <select
+                name="previous_training"
+                value={form.previous_training}
+                onChange={updateField}
+                data-testid="booking-previous-training"
+              >
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
+            <label>
+              Primary fitness or body composition goal
+              <select
+                name="focus"
+                value={form.focus}
+                onChange={updateField}
+                data-testid="booking-focus"
+              >
+                <option>Strength Training</option>
+                <option>Weight Loss</option>
+                <option>Athletic Performance</option>
+              </select>
+            </label>
+            <label>
+              Weekly training commitment
+              <select
+                name="commitment"
+                value={form.commitment}
+                onChange={updateField}
+                data-testid="booking-commitment"
+              >
+                <option>1x/week</option>
+                <option>2x/week</option>
+                <option>3+/week</option>
+              </select>
+            </label>
             <label className="full-field">
               What does success look like to you 3+ months from now?
               <textarea
@@ -263,44 +301,6 @@ export function Book() {
                 onChange={updateField}
                 data-testid="booking-promotion-code"
               />
-            </label>
-            <label>
-              Have you previously tried personal training?
-              <select
-                name="previous_training"
-                value={form.previous_training}
-                onChange={updateField}
-                data-testid="booking-previous-training"
-              >
-                <option>Yes</option>
-                <option>No</option>
-              </select>
-            </label>
-            <label>
-              Primary fitness or body composition goal
-              <select
-                name="focus"
-                value={form.focus}
-                onChange={updateField}
-                data-testid="booking-focus"
-              >
-                <option>Strength Training</option>
-                <option>Weight Loss</option>
-                <option>Athletic Performance</option>
-              </select>
-            </label>
-            <label>
-              Weekly training commitment
-              <select
-                name="commitment"
-                value={form.commitment}
-                onChange={updateField}
-                data-testid="booking-commitment"
-              >
-                <option>1x/week</option>
-                <option>2x/week</option>
-                <option>3+/week</option>
-              </select>
             </label>
           </div>
         </section>
