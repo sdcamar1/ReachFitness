@@ -53,6 +53,8 @@ async def notify_new_booking(settings: Settings, appointment: dict) -> None:
             ("Time", "time"),
             ("Session Type", "service_type"),
             ("Focus", "focus"),
+            ("3+ Month Success", "success_vision"),
+            ("Previous Personal Training", "previous_training"),
             ("Commitment", "commitment"),
             ("Obstacle", "obstacle"),
             ("Preferred Contact", "contact_preference"),

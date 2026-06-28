@@ -37,6 +37,8 @@ class AppointmentCreate(BaseModel):
     service_type: AppointmentServiceType = "In-Person Training"
     duration: AppointmentDuration = "60 Minutes"
     focus: AppointmentFocus
+    success_vision: str = Field(default="", max_length=2000)
+    previous_training: Literal["Yes", "No"] = "No"
     commitment: str = Field(default="", max_length=50)
     obstacle: str = Field(default="", max_length=2000)
     promotion_code: str = Field(default="", max_length=200)
@@ -58,6 +60,8 @@ class AppointmentResponse(BaseModel):
     service_type: AppointmentServiceType
     duration: AppointmentDuration
     focus: AppointmentFocus
+    success_vision: str
+    previous_training: Literal["Yes", "No"]
     commitment: str
     obstacle: str
     promotion_code: str
@@ -88,6 +92,8 @@ def serialize_appointment(document: dict) -> AppointmentResponse:
         service_type=document.get("service_type", "In-Person Training"),
         duration=document.get("duration", "60 Minutes"),
         focus=document["focus"],
+        success_vision=document.get("success_vision", ""),
+        previous_training=document.get("previous_training", "No"),
         commitment=document.get("commitment", ""),
         obstacle=document.get("obstacle", ""),
         promotion_code=document.get("promotion_code", ""),

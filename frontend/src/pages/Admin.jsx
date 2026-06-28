@@ -186,6 +186,16 @@ export function Admin() {
                   )}
                   <p className="eyebrow">FOCUS</p>
                   <p>{appointment.focus}</p>
+                  {appointment.success_vision && (
+                    <p className="notes">
+                      3+ month success: {appointment.success_vision}
+                    </p>
+                  )}
+                  {appointment.previous_training && (
+                    <p>
+                      Previous personal training: {appointment.previous_training}
+                    </p>
+                  )}
                   {appointment.commitment && <p>{appointment.commitment}</p>}
                   {appointment.contact_preference && (
                     <p>Prefers {appointment.contact_preference}</p>

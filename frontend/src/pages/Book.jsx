@@ -17,6 +17,8 @@ const labels = {
 
 const emptyForm = {
   service_type: "In-Person Training",
+  success_vision: "",
+  previous_training: "No",
   focus: "Strength Training",
   commitment: "1x/week",
   obstacle: "",
@@ -220,6 +222,29 @@ export function Book() {
             <h2>Goals</h2>
           </div>
           <div className="form-grid">
+            <label className="full-field">
+              What does success look like to you 3+ months from now?
+              <textarea
+                required
+                name="success_vision"
+                rows="3"
+                value={form.success_vision}
+                onChange={updateField}
+                data-testid="booking-success-vision"
+              />
+            </label>
+            <label>
+              Have you previously tried personal training?
+              <select
+                name="previous_training"
+                value={form.previous_training}
+                onChange={updateField}
+                data-testid="booking-previous-training"
+              >
+                <option>Yes</option>
+                <option>No</option>
+              </select>
+            </label>
             <label>
               Primary fitness or body composition goal
               <select
@@ -247,7 +272,7 @@ export function Book() {
               </select>
             </label>
             <label className="full-field">
-              Biggest obstacle to staying consistent
+              What is your biggest obstacle to staying consistent?
               <textarea
                 required
                 name="obstacle"
