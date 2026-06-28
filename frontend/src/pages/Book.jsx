@@ -219,7 +219,7 @@ export function Book() {
         <section className="booking-step">
           <div className="step-label">
             <span>03</span>
-            <h2>Goals</h2>
+            <h2>Intake Questions</h2>
           </div>
           <div className="form-grid">
             <label>
@@ -283,7 +283,9 @@ export function Book() {
               />
             </label>
             <label className="full-field">
-              Other information I should know <span>(optional)</span>
+              <span className="field-label">
+                Other information I should know <small>(optional)</small>
+              </span>
               <textarea
                 name="notes"
                 rows="4"
@@ -294,7 +296,9 @@ export function Book() {
               />
             </label>
             <label>
-              Promotion code <span>(optional)</span>
+              <span className="field-label">
+                Promotion code <small>(optional)</small>
+              </span>
               <input
                 name="promotion_code"
                 value={form.promotion_code}
@@ -362,7 +366,7 @@ export function Book() {
             disabled={submitting}
             data-testid="submit-booking"
           >
-            {submitting ? "Submitting..." : "Book a Consultation"}
+            {submitting ? "Submitting..." : "BOOK CONSULTATION"}
             <ArrowRight size={18} />
           </Button>
         </section>

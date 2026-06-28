@@ -1257,6 +1257,19 @@ label span {
   text-transform: none;
 }
 
+.booking-form .field-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: inherit;
+}
+
+.booking-form .field-label small {
+  color: #777;
+  font-size: 12px;
+  font-weight: 400;
+}
+
 input,
 textarea,
 select {
