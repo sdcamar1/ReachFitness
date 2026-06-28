@@ -468,6 +468,34 @@ em {
   margin: 45px auto 60px;
 }
 
+.home-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 28px;
+  color: color-mix(in srgb, var(--ink) 68%, transparent);
+}
+
+.home-socials > span {
+  margin-right: 5px;
+}
+
+.home-socials a {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  transition: color 200ms ease, border-color 200ms ease;
+}
+
+.home-socials a:hover {
+  color: var(--rust);
+  border-color: var(--rust);
+}
+
 .about-page {
   padding-top: 160px;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowDownRight, ArrowRight } from "lucide-react";
+import { ArrowDownRight, ArrowRight, Facebook, Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const disciplines = [
@@ -107,6 +107,29 @@ export function Home() {
         <Link className="button link-button" to="/book" data-testid="closing-book">
           Book a session <ArrowRight size={18} />
         </Link>
+        <div className="home-socials" aria-label="REACH Fitness social media">
+          <span className="eyebrow">FOLLOW REACH</span>
+          <a
+            href="https://www.instagram.com/reachfitnesskc?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            target="_blank"
+            rel="noreferrer"
+            aria-label="REACH Fitness on Instagram"
+            title="Instagram"
+            data-testid="home-instagram"
+          >
+            <Instagram size={17} />
+          </a>
+          <a
+            href="https://www.facebook.com/share/1Pqe1LbQ2m/?mibextid=wwXIfr"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="REACH Fitness on Facebook"
+            title="Facebook"
+            data-testid="home-facebook"
+          >
+            <Facebook size={17} />
+          </a>
+        </div>
       </section>
     </>
   );
